@@ -1,6 +1,6 @@
 # Documentação
 
-Documentação do produto será adicionada em campanhas autorizadas. Registros e evidências da Campanha 0001 ficam em `~/projetos/idatabase-client-historico`.
+Documentação do produto será adicionada em campanhas autorizadas. Registros e evidências das campanhas ficam em `~/projetos/repos/idatabase-client-historico`.
 
 
 ## Governança de campanhas
