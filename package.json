@@ -1,0 +1,36 @@
+{
+  "name": "idatabase-client-advanced",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "packageManager": "npm@11.21.1",
+  "engines": {
+    "node": "^22.12.0 || ^24.0.0 || >=26.0.0",
+    "npm": ">=10.0.0"
+  },
+  "workspaces": [
+    "packages/contracts",
+    "apps/server",
+    "apps/web"
+  ],
+  "scripts": {
+    "build": "npm run build --workspaces --if-present",
+    "typecheck": "npm run build --workspace @idb/contracts && npm run typecheck --workspaces --if-present",
+    "test": "vitest run",
+    "lint": "eslint \"apps/**/*.{ts,tsx}\" \"packages/**/*.ts\"",
+    "dev:web": "npm run dev --workspace @idb/web",
+    "start:server": "npm run start --workspace @idb/server",
+    "verify": "npm run build && npm run typecheck && npm run lint && npm test"
+  },
+  "devDependencies": {
+    "@types/node": "26.4.0",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "@vitejs/plugin-react": "6.2.1",
+    "eslint": "10.14.0",
+    "typescript": "6.0.3",
+    "typescript-eslint": "8.72.1",
+    "vite": "8.3.5",
+    "vitest": "5.1.0"
+  }
+}

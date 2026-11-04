@@ -1,5 +1,5 @@
 # iDataBase Client Avançado
 
-Fundação estrutural do monorepo, Campanha 0001 (F1). Baseline: v5.4 — FROZEN.
+Monorepo iDataBase Client Avançado. Baseline vigente: `IDB-FREEZE-AUTH-v5.5`, reconstrução versionada e rastreável (não recuperação byte a byte da v5.4). A documentação normativa e o histórico estão no [repositório histórico](https://github.com/mackowen/idatabase-client-historico/tree/main/BASELINES/IDB-FREEZE-AUTH-v5.5).
 
-Este repositório contém somente a estrutura inicial e documentação de escopo. Nenhuma aplicação, contrato, dependência ou script executável foi implementado nesta campanha. Consulte o repositório de histórico para registros, evidências e pendências.
+Consulte o repositório histórico para campanhas, evidências, decisões e pendências. A execução mínima da Campanha 0003 não implementa ainda adapters de bancos, persistência interna definitiva, execução SQL, vault, workers definitivos ou interface de administração.
