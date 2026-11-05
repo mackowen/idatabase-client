@@ -1,9 +1,11 @@
 import Fastify from "fastify";
 import pino, { type Logger } from "pino";
 import { healthResponseSchema } from "@idb/contracts/api";
+import type { InternalStore } from "@idb/persistence";
 
 export interface AppOptions {
   logger?: Logger;
+  persistence?: InternalStore;
 }
 
 export function createApp(options: AppOptions = {}) {
@@ -16,6 +18,12 @@ export function createApp(options: AppOptions = {}) {
   });
 
   const app = Fastify({ loggerInstance: logger });
+
+  if (options.persistence) {
+    app.addHook("onClose", async () => {
+      await options.persistence?.close();
+    });
+  }
 
   app.get("/health", async (_request, reply) => {
     const response = healthResponseSchema.parse({

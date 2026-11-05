@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@idb/contracts": "*",
+    "@idb/persistence": "*",
     "fastify": "5.12.8",
     "pino": "10.4.0"
   }

@@ -1,12 +1,19 @@
 import { pathToFileURL } from "node:url";
+import { openInternalStore } from "@idb/persistence";
 import { createApp } from "./app.js";
 
 export async function startServer(): Promise<void> {
-  const app = createApp();
+  const persistence = await openInternalStore();
+  const app = createApp({ persistence });
   const host = process.env.HOST ?? "127.0.0.1";
   const port = Number(process.env.PORT ?? "3000");
 
-  await app.listen({ host, port });
+  try {
+    await app.listen({ host, port });
+  } catch (error) {
+    await app.close();
+    throw error;
+  }
   app.log.info({ host, port }, "server_started");
 
   let stopping = false;

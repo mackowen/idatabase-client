@@ -1,13 +1,17 @@
 import { spawn } from "node:child_process";
 import { once } from "node:events";
+import { mkdtempSync, rmSync } from "node:fs";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { describe, expect, it } from "vitest";
 
 describe("server process lifecycle", () => {
   it("starts the built Fastify process and exits after SIGTERM", async () => {
     const entrypoint = fileURLToPath(new URL("../dist/main.js", import.meta.url));
+    const dataDirectory = mkdtempSync(join(tmpdir(), "idb-server-lifecycle-"));
     const child = spawn(process.execPath, [entrypoint], {
-      env: { ...process.env, HOST: "127.0.0.1", PORT: "0", LOG_LEVEL: "info" },
+      env: { ...process.env, HOST: "127.0.0.1", PORT: "0", LOG_LEVEL: "info", IDB_DATA_DIR: dataDirectory },
       stdio: ["ignore", "pipe", "pipe"]
     });
 
@@ -47,6 +51,7 @@ describe("server process lifecycle", () => {
         child.kill("SIGTERM");
         await once(child, "exit");
       }
+      rmSync(dataDirectory, { recursive: true, force: true });
     }
   }, 15_000);
 });
